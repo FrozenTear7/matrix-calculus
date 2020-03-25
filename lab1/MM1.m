@@ -1,4 +1,4 @@
-function [C] = MM2(A,B)
+function [C] = MM1(A,B)
   C_1 = MV2(A, B(:, 1));
   C_2 = MV2(A, B(:, 2));
   
