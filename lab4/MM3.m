@@ -1,5 +1,5 @@
-function x = MM3(A)  
-  e = 0.1
+function [L, z] = MM3(A)  
+  e = 0.001
   
   W_i = [1; 1; 1]
   E_i = 1
@@ -21,5 +21,6 @@ function x = MM3(A)
     (W_i(3, 1) - L_i * Z_i(3, 1))^2)
   end
   
-  x = L_i
+  L = L_i
+  z = Z_i
 endfunction
