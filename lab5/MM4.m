@@ -1,35 +1,35 @@
-function x = MM4(A)
+function MM4(A)  
+  ATA = A' * A
   AAT = A * A'
   
-  eigVal = sort(round(eig(AAT)), "descend")
+  UeigVal = sort(eig(AAT), "descend")
+  VeigVal = sort(eig(ATA), "descend")
+  
+  # Sigma
   
   Sigma = [
-    sqrt(eigVal(1)) 0 0;
-    0 sqrt(eigVal(2)) 0;
-    0 0 sqrt(eigVal(3))
+    sqrt(UeigVal(1)) 0 0;
+    0 sqrt(UeigVal(2)) 0;
+    0 0 sqrt(UeigVal(3))
   ]
   
-  tmpA = [
-    AAT(1, 1) - eigVal(1) AAT(1, 2) AAT(1, 3);
-    AAT(2, 1) AAT(2, 2) - eigVal(1) AAT(2, 3);
-    AAT(3, 1) AAT(3, 2) AAT(3, 3) - eigVal(1);
-  ]
+  # U
   
-  U1 = sym.solve(tmpA, [0; 0; 0])
+  U1 = getVector(AAT, UeigVal(1))
+  U2 = getVector(AAT, UeigVal(2))
+  U3 = getVector(AAT, UeigVal(3))
+  U = horzcat(U1, U2, U3)
   
-  tmpA = [
-    AAT(1, 1) - eigVal(2) AAT(1, 3) AAT(1, 3);
-    AAT(2, 1) AAT(2, 2) - eigVal(2) AAT(2, 3);
-    AAT(3, 1) AAT(3, 2) AAT(3, 3) - eigVal(2);
-  ]
+  # V
   
-  U2 = linsolve(tmpA, [0; 0; 0])
+  V1 = 1 / Sigma(1, 1) * A' * U1
+  V2 = 1 / Sigma(2, 2) * A' * U2
+  V3 = 1 / Sigma(3, 3) * A' * U3 
+  V = horzcat(V1, V2, V3)
   
-  tmpA = [
-    AAT(1, 1) - eigVal(3) AAT(1, 3) AAT(1, 3);
-    AAT(2, 1) AAT(2, 2) - eigVal(3) AAT(2, 3);
-    AAT(3, 1) AAT(3, 2) AAT(3, 3) - eigVal(3);
-  ]
+  U
+  Sigma
+  V
   
-  U3 = linsolve(tmpA, [0; 0; 0])
+  U * Sigma * V'
 endfunction
