@@ -7,7 +7,7 @@ function MM4(A)
   
   y = [-tZnaczek * x(1, 1); 0]
   
-  u = 1 / (x(1, 1) + tZnaczek) * (x - y)
+  u = (x - y) / (x(1, 1) + tZnaczek)
   
   I = [1 0; 0 1]
   
