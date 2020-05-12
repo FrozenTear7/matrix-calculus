@@ -1,0 +1,123 @@
+---
+title: "SW_L2_PMendroch"
+author: "Paweł Mendroch"
+date: "5/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(MASS)
+attach(Boston)
+```
+
+## Zadanie 1
+```{r zad1}
+lmFitSimpleZn <- lm(crim ~ zn)
+summary(lmFitSimpleZn)$adj.r.squared
+lmFitSimpleIndus <- lm(crim ~ indus)
+summary(lmFitSimpleIndus)$adj.r.squared
+lmFitSimpleChas <- lm(crim ~ chas)
+summary(lmFitSimpleChas)$adj.r.squared
+lmFitSimpleNox <- lm(crim ~ nox)
+summary(lmFitSimpleNox)$adj.r.squared
+lmFitSimpleRm <- lm(crim ~ rm)
+summary(lmFitSimpleRm)$adj.r.squared
+lmFitSimpleAge <- lm(crim ~ age)
+summary(lmFitSimpleAge)$adj.r.squared
+lmFitSimpleDis <- lm(crim ~ dis)
+summary(lmFitSimpleDis)$adj.r.squared
+lmFitSimpleRad <- lm(crim ~ rad)
+summary(lmFitSimpleRad)$adj.r.squared
+lmFitSimpleTax <- lm(crim ~ tax)
+summary(lmFitSimpleTax)$adj.r.squared
+lmFitSimplePtratio <- lm(crim ~ ptratio)
+summary(lmFitSimplePtratio)$adj.r.squared
+lmFitSimpleBlack <- lm(crim ~ black)
+summary(lmFitSimpleBlack)$adj.r.squared
+lmFitSimpleLstat <- lm(crim ~ lstat)
+summary(lmFitSimpleLstat)$adj.r.squared
+lmFitSimpleMedv <- lm(crim ~ medv)
+summary(lmFitSimpleMedv)$adj.r.squared
+```
+
+Patrząc na powyższą analizę regresji, można zobaczyć, że predykatory wpływające najmocniej na **crim** to:
+
+1. **rad** - adjusted R-squared = 0.3900489
+2. **tax** - adjusted -squared = 0.338304
+3. **lstat** - adjusted R-squared = 0.2060187
+
+## Zadanie 2
+```{r zad2}
+lmFitMulti = lm(crim ~ ., data = Boston)
+summary(lmFitMulti)
+```
+
+Zależność odpowiedzi jest istotna szczególnie od predyktorów **dis** oraz **rad** - ich wartości *PR(>|t|)*
+mają significance typu ***. 
+
+**Medv** jest również na poziomie **, co warto zanotować, pozostałe predktory dają mniej znaczące zależności.
+
+## Zadanie 3
+```{r zad3}
+fitSimple = c(
+  lmFitSimpleZn$coefficients[2], 
+  lmFitSimpleIndus$coefficients[2], 
+  lmFitSimpleChas$coefficients[2], 
+  lmFitSimpleNox$coefficients[2],
+  lmFitSimpleRm$coefficients[2],
+  lmFitSimpleAge$coefficients[2],
+  lmFitSimpleDis$coefficients[2],
+  lmFitSimpleRad$coefficients[2],
+  lmFitSimpleTax$coefficients[2],
+  lmFitSimplePtratio$coefficients[2],
+  lmFitSimpleBlack$coefficients[2],
+  lmFitSimpleLstat$coefficients[2],
+  lmFitSimpleMedv$coefficients[2]
+)
+
+fitMulti = lmFitMulti$coefficients[2:14]
+plot(fitSimple, fitMulti)
+```
+
+## Zadanie 4
+```{r zad4}
+lmFit3 <- lm(crim ~ poly(zn, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(indus, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(nox, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(rm, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(age, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(dis, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(rad, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(tax, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(ptratio, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(black, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(lstat, 3))
+summary(lmFit3)
+lmFit3 <- lm(crim ~ poly(medv, 3))
+summary(lmFit3)
+```
+
+Interesuje nas kolumna *Pr(>|t|)*, gdzie w przypadku utrzymania się trendu *** możemy jasno ujrzeć zależność
+między danym predyktorem, a odpowiedzią. Oznaki istotnej nieliniowej zależności możemy ujrzeć dla predyktorów:
+
+1. **nox**
+2. **dis**
+3. **medv**
+
+A odrobinę słabiej dla:
+
+1. **ptratio**
+2. **age**
+3. **indus**
