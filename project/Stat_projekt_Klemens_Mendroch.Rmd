@@ -1,0 +1,29 @@
+---
+title: "Stat_projekt_Klemens_Mendroch"
+author: "Wojciech Klemens, Paweł Mendroch"
+date: "6/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readr)
+```
+
+## Dataset
+
+Zbiór danych z których będziemy korzystać w naszym projekcie dane z gry League of Legends,
+zawierające informacje na temat obu przeciwnych drużyn, ich statystyki podczas gry, takie
+jak zdobyte złoto, doświadczenie, pokonani neutralni przeciwnicy, itd.. <br />
+Dane w datasecie były zbieranie po odbyciu 10 minut gry. <br />
+[Link do datasetu](https://www.kaggle.com/bobbyscience/league-of-legends-diamond-ranked-games-10-min)
+
+## Coś tam dalej
+
+
+```{r lol_data, echo=FALSE}
+lol_data <- read_csv("high_diamond_ranked_10min.csv")
+summary(lol_data)
+```
+
