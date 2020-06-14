@@ -373,90 +373,257 @@ summary {
 <h2>Dataset</h2>
 <p>Zbiór danych z których będziemy korzystać w naszym projekcie dane z gry League of Legends, zawierające informacje na temat obu przeciwnych drużyn, ich statystyki podczas gry, takie jak zdobyte złoto, doświadczenie, pokonani neutralni przeciwnicy, itd.. <br /> Dane w datasecie były zbieranie po odbyciu 10 minut gry. <br /> <a href="https://www.kaggle.com/bobbyscience/league-of-legends-diamond-ranked-games-10-min">Link do datasetu</a></p>
 </div>
-<div id="coś-tam-dalej" class="section level2">
-<h2>Coś tam dalej</h2>
-<pre><code>## Parsed with column specification:
-## cols(
-##   .default = col_double()
-## )</code></pre>
-<pre><code>## See spec(...) for full column specifications.</code></pre>
-<pre><code>##      gameId             blueWins     blueWardsPlaced  blueWardsDestroyed
-##  Min.   :4.295e+09   Min.   :0.000   Min.   :  5.00   Min.   : 0.000    
-##  1st Qu.:4.483e+09   1st Qu.:0.000   1st Qu.: 14.00   1st Qu.: 1.000    
-##  Median :4.511e+09   Median :0.000   Median : 16.00   Median : 3.000    
-##  Mean   :4.500e+09   Mean   :0.499   Mean   : 22.29   Mean   : 2.825    
-##  3rd Qu.:4.522e+09   3rd Qu.:1.000   3rd Qu.: 20.00   3rd Qu.: 4.000    
-##  Max.   :4.528e+09   Max.   :1.000   Max.   :250.00   Max.   :27.000    
-##  blueFirstBlood     blueKills        blueDeaths      blueAssists    
-##  Min.   :0.0000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
-##  1st Qu.:0.0000   1st Qu.: 4.000   1st Qu.: 4.000   1st Qu.: 4.000  
-##  Median :1.0000   Median : 6.000   Median : 6.000   Median : 6.000  
-##  Mean   :0.5048   Mean   : 6.184   Mean   : 6.138   Mean   : 6.645  
-##  3rd Qu.:1.0000   3rd Qu.: 8.000   3rd Qu.: 8.000   3rd Qu.: 9.000  
-##  Max.   :1.0000   Max.   :22.000   Max.   :22.000   Max.   :29.000  
-##  blueEliteMonsters  blueDragons     blueHeralds    blueTowersDestroyed
-##  Min.   :0.00      Min.   :0.000   Min.   :0.000   Min.   :0.00000    
-##  1st Qu.:0.00      1st Qu.:0.000   1st Qu.:0.000   1st Qu.:0.00000    
-##  Median :0.00      Median :0.000   Median :0.000   Median :0.00000    
-##  Mean   :0.55      Mean   :0.362   Mean   :0.188   Mean   :0.05142    
-##  3rd Qu.:1.00      3rd Qu.:1.000   3rd Qu.:0.000   3rd Qu.:0.00000    
-##  Max.   :2.00      Max.   :1.000   Max.   :1.000   Max.   :4.00000    
-##  blueTotalGold    blueAvgLevel   blueTotalExperience blueTotalMinionsKilled
-##  Min.   :10730   Min.   :4.600   Min.   :10098       Min.   : 90.0         
-##  1st Qu.:15416   1st Qu.:6.800   1st Qu.:17168       1st Qu.:202.0         
-##  Median :16398   Median :7.000   Median :17951       Median :218.0         
-##  Mean   :16503   Mean   :6.916   Mean   :17928       Mean   :216.7         
-##  3rd Qu.:17459   3rd Qu.:7.200   3rd Qu.:18724       3rd Qu.:232.0         
-##  Max.   :23701   Max.   :8.000   Max.   :22224       Max.   :283.0         
-##  blueTotalJungleMinionsKilled  blueGoldDiff       blueExperienceDiff
-##  Min.   : 0.00                Min.   :-10830.00   Min.   :-9333.00  
-##  1st Qu.:44.00                1st Qu.: -1585.50   1st Qu.:-1290.50  
-##  Median :50.00                Median :    14.00   Median :  -28.00  
-##  Mean   :50.51                Mean   :    14.41   Mean   :  -33.62  
-##  3rd Qu.:56.00                3rd Qu.:  1596.00   3rd Qu.: 1212.00  
-##  Max.   :92.00                Max.   : 11467.00   Max.   : 8348.00  
-##   blueCSPerMin   blueGoldPerMin redWardsPlaced   redWardsDestroyed
-##  Min.   : 9.00   Min.   :1073   Min.   :  6.00   Min.   : 0.000   
-##  1st Qu.:20.20   1st Qu.:1542   1st Qu.: 14.00   1st Qu.: 1.000   
-##  Median :21.80   Median :1640   Median : 16.00   Median : 2.000   
-##  Mean   :21.67   Mean   :1650   Mean   : 22.37   Mean   : 2.723   
-##  3rd Qu.:23.20   3rd Qu.:1746   3rd Qu.: 20.00   3rd Qu.: 4.000   
-##  Max.   :28.30   Max.   :2370   Max.   :276.00   Max.   :24.000   
-##  redFirstBlood       redKills        redDeaths        redAssists    
-##  Min.   :0.0000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
-##  1st Qu.:0.0000   1st Qu.: 4.000   1st Qu.: 4.000   1st Qu.: 4.000  
-##  Median :0.0000   Median : 6.000   Median : 6.000   Median : 6.000  
-##  Mean   :0.4952   Mean   : 6.138   Mean   : 6.184   Mean   : 6.662  
-##  3rd Qu.:1.0000   3rd Qu.: 8.000   3rd Qu.: 8.000   3rd Qu.: 9.000  
-##  Max.   :1.0000   Max.   :22.000   Max.   :22.000   Max.   :28.000  
-##  redEliteMonsters   redDragons       redHeralds   redTowersDestroyed
-##  Min.   :0.0000   Min.   :0.0000   Min.   :0.00   Min.   :0.00000   
-##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00   1st Qu.:0.00000   
-##  Median :0.0000   Median :0.0000   Median :0.00   Median :0.00000   
-##  Mean   :0.5731   Mean   :0.4131   Mean   :0.16   Mean   :0.04302   
-##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.00   3rd Qu.:0.00000   
-##  Max.   :2.0000   Max.   :1.0000   Max.   :1.00   Max.   :2.00000   
-##   redTotalGold    redAvgLevel    redTotalExperience redTotalMinionsKilled
-##  Min.   :11212   Min.   :4.800   Min.   :10465      Min.   :107.0        
-##  1st Qu.:15428   1st Qu.:6.800   1st Qu.:17210      1st Qu.:203.0        
-##  Median :16378   Median :7.000   Median :17974      Median :218.0        
-##  Mean   :16489   Mean   :6.925   Mean   :17962      Mean   :217.3        
-##  3rd Qu.:17419   3rd Qu.:7.200   3rd Qu.:18765      3rd Qu.:233.0        
-##  Max.   :22732   Max.   :8.200   Max.   :22269      Max.   :289.0        
-##  redTotalJungleMinionsKilled  redGoldDiff        redExperienceDiff 
-##  Min.   : 4.00               Min.   :-11467.00   Min.   :-8348.00  
-##  1st Qu.:44.00               1st Qu.: -1596.00   1st Qu.:-1212.00  
-##  Median :51.00               Median :   -14.00   Median :   28.00  
-##  Mean   :51.31               Mean   :   -14.41   Mean   :   33.62  
-##  3rd Qu.:57.00               3rd Qu.:  1585.50   3rd Qu.: 1290.50  
-##  Max.   :92.00               Max.   : 10830.00   Max.   : 9333.00  
-##   redCSPerMin    redGoldPerMin 
-##  Min.   :10.70   Min.   :1121  
-##  1st Qu.:20.30   1st Qu.:1543  
-##  Median :21.80   Median :1638  
-##  Mean   :21.73   Mean   :1649  
-##  3rd Qu.:23.30   3rd Qu.:1742  
-##  Max.   :28.90   Max.   :2273</code></pre>
+<div id="analiza-danych" class="section level2">
+<h2>Analiza danych</h2>
+<p>W analizie poniższych danych będziemy się skupiać wyłącznie na drużynie niebieskiej, gdyż gra ta nie faworyzuje żadnej ze stron i szanse na wygrane w teorii powinny wynosić 50%.</p>
+<div id="wygrane-drużyny-niebieskiej" class="section level3">
+<h3>Wygrane drużyny niebieskiej</h3>
+<p>Poniżej badamy zależność zwycięstwa drużyny niebieskiej od wszystkich pozostałych czynników:</p>
+<pre><code>## 
+## Call:
+## lm(formula = blueWins ~ ., data = lol_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.10286 -0.36332 -0.00404  0.36183  1.16745 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                   3.885e-01  2.167e-01   1.793 0.072991 .  
+## blueWardsPlaced              -3.458e-04  2.401e-04  -1.440 0.149930    
+## blueWardsDestroyed            5.728e-04  2.029e-03   0.282 0.777756    
+## blueFirstBlood                1.679e-02  9.619e-03   1.746 0.080929 .  
+## blueKills                    -5.380e-03  5.333e-03  -1.009 0.313087    
+## blueDeaths                    4.552e-03  5.342e-03   0.852 0.394166    
+## blueAssists                  -2.443e-03  2.040e-03  -1.198 0.231125    
+## blueDragons                   6.564e-02  1.180e-02   5.563 2.72e-08 ***
+## blueHeralds                   1.288e-02  1.163e-02   1.108 0.268096    
+## blueTowersDestroyed          -7.949e-02  2.217e-02  -3.585 0.000339 ***
+## blueTotalGold                 5.209e-06  1.732e-05   0.301 0.763576    
+## blueAvgLevel                 -6.157e-03  3.245e-02  -0.190 0.849531    
+## blueTotalExperience          -7.239e-06  1.444e-05  -0.501 0.616117    
+## blueTotalMinionsKilled       -7.942e-04  3.437e-04  -2.311 0.020860 *  
+## blueTotalJungleMinionsKilled  4.641e-04  5.881e-04   0.789 0.430059    
+## blueGoldDiff                  8.872e-05  1.208e-05   7.343 2.25e-13 ***
+## blueExperienceDiff            4.737e-05  1.077e-05   4.398 1.10e-05 ***
+## redWardsPlaced               -2.296e-04  2.352e-04  -0.976 0.329035    
+## redWardsDestroyed            -6.821e-04  2.058e-03  -0.331 0.740330    
+## redAssists                    2.344e-03  1.996e-03   1.174 0.240313    
+## redDragons                   -5.724e-02  1.161e-02  -4.929 8.42e-07 ***
+## redHeralds                   -1.886e-02  1.239e-02  -1.522 0.127970    
+## redTowersDestroyed            8.879e-02  2.457e-02   3.614 0.000303 ***
+## redAvgLevel                   1.156e-02  3.253e-02   0.355 0.722333    
+## redTotalMinionsKilled         1.003e-03  3.413e-04   2.940 0.003292 ** 
+## redTotalJungleMinionsKilled   1.151e-03  5.862e-04   1.964 0.049550 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4244 on 9853 degrees of freedom
+## Multiple R-squared:  0.2813, Adjusted R-squared:  0.2795 
+## F-statistic: 154.3 on 25 and 9853 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Poniżej badamy zależność zwycięstwa drużyny niebieskiej od wyłącznie zabójstw oraz zniszczonych wież:</p>
+<pre><code>## 
+## Call:
+## lm(formula = blueWins ~ blueKills + blueTowersDestroyed, data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.0335 -0.4288 -0.1571  0.4626  0.8429 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         0.157119   0.010828  14.511  &lt; 2e-16 ***
+## blueKills           0.054329   0.001596  34.030  &lt; 2e-16 ***
+## blueTowersDestroyed 0.115764   0.019671   5.885 4.11e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4699 on 9876 degrees of freedom
+## Multiple R-squared:  0.1169, Adjusted R-squared:  0.1167 
+## F-statistic: 653.7 on 2 and 9876 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## [1] 0.3609677</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = blueWins ~ poly(blueKills, 4), data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.9377 -0.4375 -0.1221  0.4414  0.8779 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          0.499038   0.004734 105.426  &lt; 2e-16 ***
+## poly(blueKills, 4)1 16.765488   0.470483  35.635  &lt; 2e-16 ***
+## poly(blueKills, 4)2 -1.692727   0.470483  -3.598 0.000322 ***
+## poly(blueKills, 4)3 -0.307437   0.470483  -0.653 0.513482    
+## poly(blueKills, 4)4  0.215838   0.470483   0.459 0.646419    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4705 on 9874 degrees of freedom
+## Multiple R-squared:  0.115,  Adjusted R-squared:  0.1147 
+## F-statistic: 320.9 on 4 and 9874 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="zabite-smoki" class="section level3">
+<h3>Zabite smoki</h3>
+<p>Poniżej badamy zależność zabitych smoków oraz heraldów od współczynników takich jak wizja na mapie, czy przewaga w zabójstwach i doświadczeniu oraz kontrola ‘jungle’, neutralnego terenu obejmującego miejsce pojawiania się smoków i heraldów (neutralnych elitarnych przeciwników):</p>
+<pre><code>## 
+## Call:
+## lm(formula = blueDragons ~ blueWardsPlaced + blueWardsDestroyed + 
+##     redWardsPlaced + redWardsDestroyed + blueKills + blueExperienceDiff + 
+##     blueTotalJungleMinionsKilled, data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.8493 -0.3655 -0.2430  0.5386  1.0901 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                  -1.495e-01  3.530e-02  -4.235 2.30e-05 ***
+## blueWardsPlaced               2.731e-04  2.612e-04   1.046 0.295698    
+## blueWardsDestroyed            8.046e-03  2.197e-03   3.663 0.000251 ***
+## redWardsPlaced               -6.667e-04  2.557e-04  -2.608 0.009126 ** 
+## redWardsDestroyed            -1.259e-03  2.229e-03  -0.565 0.572292    
+## blueKills                     2.110e-02  2.036e-03  10.364  &lt; 2e-16 ***
+## blueExperienceDiff            2.249e-05  3.301e-06   6.812 1.02e-11 ***
+## blueTotalJungleMinionsKilled  7.350e-03  5.215e-04  14.096  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4641 on 9871 degrees of freedom
+## Multiple R-squared:  0.06818,    Adjusted R-squared:  0.06751 
+## F-statistic: 103.2 on 7 and 9871 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="zabite-heraldy" class="section level3">
+<h3>Zabite heraldy</h3>
+<pre><code>## 
+## Call:
+## lm(formula = blueHeralds ~ blueWardsPlaced + blueWardsDestroyed + 
+##     redWardsPlaced + redWardsDestroyed + blueKills + blueExperienceDiff + 
+##     blueTotalJungleMinionsKilled, data = lol_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.44155 -0.21685 -0.16064 -0.08092  1.01617 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                  -1.365e-02  2.921e-02  -0.467 0.640296    
+## blueWardsPlaced               2.935e-05  2.162e-04   0.136 0.891982    
+## blueWardsDestroyed            4.821e-04  1.818e-03   0.265 0.790908    
+## redWardsPlaced                1.735e-04  2.116e-04   0.820 0.412377    
+## redWardsDestroyed             6.103e-03  1.845e-03   3.308 0.000942 ***
+## blueKills                     1.199e-03  1.685e-03   0.711 0.476899    
+## blueExperienceDiff            2.786e-05  2.732e-06  10.199  &lt; 2e-16 ***
+## blueTotalJungleMinionsKilled  3.418e-03  4.316e-04   7.919 2.64e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3841 on 9871 degrees of freedom
+## Multiple R-squared:  0.03423,    Adjusted R-squared:  0.03355 
+## F-statistic: 49.98 on 7 and 9871 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="asysty" class="section level3">
+<h3>Asysty</h3>
+<p>Badamy wpływ kontroli wizji na mapie na pomoc przy zdobywaniu zabójstw</p>
+<pre><code>## 
+## Call:
+## lm(formula = blueAssists ~ blueWardsPlaced + blueWardsDestroyed, 
+##     data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.6265 -2.9221 -0.6091  2.3839 22.7719 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        6.137409   0.082683  74.228  &lt; 2e-16 ***
+## blueWardsPlaced    0.006974   0.002265   3.079  0.00208 ** 
+## blueWardsDestroyed 0.124698   0.018763   6.646 3.17e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.054 on 9876 degrees of freedom
+## Multiple R-squared:  0.005551,   Adjusted R-squared:  0.005349 
+## F-statistic: 27.56 on 2 and 9876 DF,  p-value: 1.156e-12</code></pre>
+</div>
+<div id="zabójstwa" class="section level3">
+<h3>Zabójstwa</h3>
+<p>Badamy wpływ kontroli wizji oraz przewagi w doświadczeniu i złocie na zdobywanie zabójstw</p>
+<pre><code>## 
+## Call:
+## lm(formula = blueKills ~ blueWardsPlaced + blueWardsDestroyed + 
+##     blueGoldDiff + blueExperienceDiff, data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.2370 -1.6430 -0.1301  1.4693 10.2045 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         6.210e+00  4.659e-02 133.312   &lt;2e-16 ***
+## blueWardsPlaced     1.422e-03  1.273e-03   1.117   0.2640    
+## blueWardsDestroyed -2.491e-02  1.057e-02  -2.356   0.0185 *  
+## blueGoldDiff        8.129e-04  2.092e-05  38.857   &lt;2e-16 ***
+## blueExperienceDiff -1.207e-05  2.673e-05  -0.452   0.6516    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.277 on 9874 degrees of freedom
+## Multiple R-squared:  0.4283, Adjusted R-squared:  0.4281 
+## F-statistic:  1849 on 4 and 9874 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="złoto-i-doświadczenie" class="section level3">
+<h3>Złoto i doświadczenie</h3>
+<p>Badamy wpływ kontroli głównych celów - elitarnych potworów oraz wierz oraz zabójstw na złoto i doświadczenie</p>
+<pre><code>## 
+## Call:
+## lm(formula = blueGoldDiff ~ blueTowersDestroyed + blueTotalMinionsKilled + 
+##     blueDragons + blueHeralds + blueKills, data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6095.3  -905.0    41.0   953.4  5838.9 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            -1.430e+04  1.451e+02 -98.538   &lt;2e-16 ***
+## blueTowersDestroyed     1.263e+03  5.999e+01  21.048   &lt;2e-16 ***
+## blueTotalMinionsKilled  5.018e+01  6.507e-01  77.117   &lt;2e-16 ***
+## blueDragons             4.195e+02  2.980e+01  14.073   &lt;2e-16 ***
+## blueHeralds             3.059e+02  3.696e+01   8.275   &lt;2e-16 ***
+## blueKills               5.113e+02  4.826e+00 105.962   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1397 on 9873 degrees of freedom
+## Multiple R-squared:  0.6761, Adjusted R-squared:  0.6759 
+## F-statistic:  4121 on 5 and 9873 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = blueExperienceDiff ~ blueTowersDestroyed + blueTotalMinionsKilled + 
+##     blueDragons + blueHeralds + blueKills, data = lol_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5329.7  -840.7    16.6   839.4  5020.6 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            -1.100e+04  1.306e+02 -84.187   &lt;2e-16 ***
+## blueTowersDestroyed     4.446e+02  5.400e+01   8.234   &lt;2e-16 ***
+## blueTotalMinionsKilled  3.934e+01  5.858e-01  67.152   &lt;2e-16 ***
+## blueDragons             2.874e+02  2.683e+01  10.710   &lt;2e-16 ***
+## blueHeralds             3.337e+02  3.328e+01  10.027   &lt;2e-16 ***
+## blueKills               3.635e+02  4.344e+00  83.672   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1257 on 9873 degrees of freedom
+## Multiple R-squared:  0.5715, Adjusted R-squared:  0.5713 
+## F-statistic:  2634 on 5 and 9873 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
 </div>
 
 

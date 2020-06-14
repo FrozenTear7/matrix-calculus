@@ -9,6 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(readr)
+
+lol_data <- read_csv("high_diamond_ranked_10min.csv")
+lol_data = na.omit(lol_data)
+lol_data = lol_data[-c(1,9,20,21,24,25,26,28,32,34,37,38,39,40)]
+attach(lol_data)
 ```
 
 ## Dataset
@@ -19,11 +24,87 @@ jak zdobyte złoto, doświadczenie, pokonani neutralni przeciwnicy, itd.. <br />
 Dane w datasecie były zbieranie po odbyciu 10 minut gry. <br />
 [Link do datasetu](https://www.kaggle.com/bobbyscience/league-of-legends-diamond-ranked-games-10-min)
 
-## Coś tam dalej
+## Analiza danych
 
+W analizie poniższych danych będziemy się skupiać wyłącznie na drużynie niebieskiej,
+gdyż gra ta nie faworyzuje żadnej ze stron i szanse na wygrane w teorii powinny wynosić 50%.
 
-```{r lol_data, echo=FALSE}
-lol_data <- read_csv("high_diamond_ranked_10min.csv")
-summary(lol_data)
+### Wygrane drużyny niebieskiej
+
+Poniżej badamy zależność zwycięstwa drużyny niebieskiej od wszystkich pozostałych czynników:
+
+```{r lm blueWins ~ all, echo=FALSE}
+summary(lm(blueWins ~ ., data = lol_data))
 ```
 
+Poniżej badamy zależność zwycięstwa drużyny niebieskiej od wyłącznie zabójstw oraz zniszczonych wież:
+
+```{r lm blueWins ~ kills + towers, echo=FALSE}
+summary(lm(blueWins ~ blueKills + blueTowersDestroyed, data = lol_data))
+```
+
+```{r logistic dataset, echo=FALSE}
+fit.logistic <- glm(blueWins ~ blueKills + blueTowersDestroyed, family = binomial, data = lol_data)
+probs.logistic <- predict(fit.logistic, type = "response")
+pred.logistic <- ifelse(probs.logistic > 0.5, "Up", "Down")
+conf.logistic <- table(pred.logistic, blueWins)
+(conf.logistic[1, 2] + conf.logistic[2, 1]) / sum(conf.logistic)
+mean(pred.logistic != blueWins)
+```
+
+```{r wielomianowa dataset, echo=FALSE}
+fit.poly <- lm(blueWins ~ poly(blueKills, 4), data = lol_data)
+summary(fit.poly)
+```
+
+### Zabite smoki
+
+Poniżej badamy zależność zabitych smoków oraz heraldów od współczynników takich jak wizja na mapie, czy
+przewaga w zabójstwach i doświadczeniu oraz kontrola 'jungle', neutralnego terenu
+obejmującego miejsce pojawiania się smoków i heraldów (neutralnych elitarnych przeciwników):
+
+```{r lm smoki, echo=FALSE}
+summary(lm(blueDragons ~ blueWardsPlaced + blueWardsDestroyed +
+                 redWardsPlaced + redWardsDestroyed + blueKills +
+                 blueExperienceDiff + blueTotalJungleMinionsKilled, data = lol_data))
+```
+
+### Zabite heraldy
+
+```{r lm heraldy, echo=FALSE}
+summary(lm(blueHeralds ~ blueWardsPlaced + blueWardsDestroyed +
+                 redWardsPlaced + redWardsDestroyed + blueKills +
+                 blueExperienceDiff + blueTotalJungleMinionsKilled, data = lol_data))
+```
+
+### Asysty
+
+Badamy wpływ kontroli wizji na mapie na pomoc przy zdobywaniu zabójstw
+
+```{r lm asysty, echo=FALSE}
+summary(lm(blueAssists ~ blueWardsPlaced + blueWardsDestroyed, data = lol_data))
+```
+
+### Zabójstwa
+
+Badamy wpływ kontroli wizji oraz przewagi w doświadczeniu i złocie na zdobywanie zabójstw
+
+```{r lm zabojstwa, echo=FALSE}
+summary(lm(blueKills ~ blueWardsPlaced + blueWardsDestroyed +
+                 blueGoldDiff + blueExperienceDiff, data = lol_data))
+```
+
+### Złoto i doświadczenie
+
+Badamy wpływ kontroli głównych celów - elitarnych potworów oraz wierz oraz zabójstw
+na złoto i doświadczenie
+
+```{r lm zloto, echo=FALSE}
+summary(lm(blueGoldDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
+                 blueDragons + blueHeralds + blueKills, data = lol_data))
+```
+
+```{r lm exp, echo=FALSE}
+summary(lm(blueExperienceDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
+                 blueDragons + blueHeralds + blueKills, data = lol_data))
+```
