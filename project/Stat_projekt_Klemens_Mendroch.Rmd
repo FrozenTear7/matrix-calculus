@@ -66,7 +66,8 @@ obejmującego miejsce pojawiania się smoków i heraldów (neutralnych elitarnyc
 ```{r lm smoki, echo=FALSE}
 summary(lm(blueDragons ~ blueWardsPlaced + blueWardsDestroyed +
                  redWardsPlaced + redWardsDestroyed + blueKills +
-                 blueExperienceDiff + blueTotalJungleMinionsKilled, data = lol_data))
+                 blueExperienceDiff + blueTotalJungleMinionsKilled +
+                 blueTowersDestroyed + blueTotalGold, data = lol_data))
 ```
 
 ### Zabite heraldy
@@ -74,15 +75,18 @@ summary(lm(blueDragons ~ blueWardsPlaced + blueWardsDestroyed +
 ```{r lm heraldy, echo=FALSE}
 summary(lm(blueHeralds ~ blueWardsPlaced + blueWardsDestroyed +
                  redWardsPlaced + redWardsDestroyed + blueKills +
-                 blueExperienceDiff + blueTotalJungleMinionsKilled, data = lol_data))
+                 blueExperienceDiff + blueTotalJungleMinionsKilled +
+                 blueTowersDestroyed + blueTotalGold, data = lol_data))
 ```
 
 ### Asysty
 
-Badamy wpływ kontroli wizji na mapie na pomoc przy zdobywaniu zabójstw
+Badamy wpływ kontroli wizji na mapie oraz przewagi na pomoc przy zdobywaniu zabójstw
 
 ```{r lm asysty, echo=FALSE}
-summary(lm(blueAssists ~ blueWardsPlaced + blueWardsDestroyed, data = lol_data))
+summary(lm(blueAssists ~ blueWardsPlaced + blueWardsDestroyed +
+                 redTotalMinionsKilled + blueDragons +
+                 blueHeralds + blueTowersDestroyed, data = lol_data))
 ```
 
 ### Zabójstwa
@@ -91,7 +95,8 @@ Badamy wpływ kontroli wizji oraz przewagi w doświadczeniu i złocie na zdobywa
 
 ```{r lm zabojstwa, echo=FALSE}
 summary(lm(blueKills ~ blueWardsPlaced + blueWardsDestroyed +
-                 blueGoldDiff + blueExperienceDiff, data = lol_data))
+                 blueGoldDiff + blueExperienceDiff + blueFirstBlood +
+                 blueTowersDestroyed, data = lol_data))
 ```
 
 ### Złoto i doświadczenie
@@ -101,10 +106,10 @@ na złoto i doświadczenie
 
 ```{r lm zloto, echo=FALSE}
 summary(lm(blueGoldDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
-                 blueDragons + blueHeralds + blueKills, data = lol_data))
+                 blueDragons + blueHeralds + blueKills + blueFirstBlood, data = lol_data))
 ```
 
 ```{r lm exp, echo=FALSE}
 summary(lm(blueExperienceDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
-                 blueDragons + blueHeralds + blueKills, data = lol_data))
+                 blueDragons + blueHeralds + blueKills + , data = lol_data))
 ```
