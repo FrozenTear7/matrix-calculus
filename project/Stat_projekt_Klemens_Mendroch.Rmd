@@ -29,6 +29,11 @@ Dane w datasecie były zbieranie po odbyciu 10 minut gry. <br />
 W analizie poniższych danych będziemy się skupiać wyłącznie na drużynie niebieskiej,
 gdyż gra ta nie faworyzuje żadnej ze stron i szanse na wygrane w teorii powinny wynosić 50%.
 
+### Regresja
+
+Początkowo skupiamy się na modelach regresji liniowej i wielomianowej, aby spróbować wyznaczyć
+i przeanalizować potencjalne zależności między poszczególnymi kolumnami, ich istotność i rząd wielkości.
+
 ### Wygrane drużyny niebieskiej
 
 Poniżej badamy zależność zwycięstwa drużyny niebieskiej od wszystkich pozostałych czynników:
@@ -46,9 +51,7 @@ summary(lm(blueWins ~ blueKills + blueTowersDestroyed, data = lol_data))
 ```{r logistic dataset, echo=FALSE}
 fit.logistic <- glm(blueWins ~ blueKills + blueTowersDestroyed, family = binomial, data = lol_data)
 probs.logistic <- predict(fit.logistic, type = "response")
-pred.logistic <- ifelse(probs.logistic > 0.5, "Up", "Down")
-conf.logistic <- table(pred.logistic, blueWins)
-(conf.logistic[1, 2] + conf.logistic[2, 1]) / sum(conf.logistic)
+pred.logistic <- ifelse(probs.logistic > 0.5, 1, 0)
 mean(pred.logistic != blueWins)
 ```
 
@@ -101,7 +104,7 @@ summary(lm(blueKills ~ blueWardsPlaced + blueWardsDestroyed +
 
 ### Złoto i doświadczenie
 
-Badamy wpływ kontroli głównych celów - elitarnych potworów oraz wierz oraz zabójstw
+Badamy wpływ kontroli głównych celów - elitarnych potworów oraz wież oraz zabójstw
 na złoto i doświadczenie
 
 ```{r lm zloto, echo=FALSE}
@@ -111,5 +114,60 @@ summary(lm(blueGoldDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
 
 ```{r lm exp, echo=FALSE}
 summary(lm(blueExperienceDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
-                 blueDragons + blueHeralds + blueKills + , data = lol_data))
+                 blueDragons + blueHeralds + blueKills, data = lol_data))
 ```
+
+### Metody logistyczne
+
+Próbujemy wykorzystać bardziej zaawansowane metody logistyczne, aby wytworzyć model będący
+w stanie przewidzieć wynik meczu na podstawie statystyk z pierwszych 10-ciu minut.
+Na początku zobaczymy, jaką dokładność predykcji jesteśmy w stanie osiągnąć korzystając ze wszystkich predyktorów.
+
+```{r rf full, echo=FALSE}
+library(randomForest)
+library(tree)
+
+lol_data <- within(lol_data, blueWinsFactor <- factor(ifelse(blueWins <= 0.5, "0", "1")))
+
+set.seed(1)
+n <- nrow(lol_data)
+train <- sample(1:n, n * 0.8)
+test <- -train
+
+wins.bag <- randomForest(blueWinsFactor ~ . - blueWins, data = lol_data, subset=train, mtry=25, importance = TRUE)
+
+wins.pred.bag <- predict(wins.bag, newdata = lol_data[test,])
+mean(wins.pred.bag != lol_data$blueWinsFactor[test])
+
+wins.rf <- randomForest(blueWinsFactor ~ . - blueWins, data = lol_data, subset=train, importance = TRUE)
+
+wins.pred.rf <- predict(wins.rf, newdata = lol_data[test,])
+mean(wins.pred.rf != lol_data$blueWinsFactor[test])
+
+```
+
+Następnie badamy jakość predykcji po odrzuceniu "oczywistych" wskaźnikóW przewagi jednej drużyny nad drugą.
+
+```{r rf cut, echo=FALSE}
+
+var.out.bool <- !names(lol_data) %in% c("blueWins", "blueGoldDiff", "blueExperienceDiff", "blueTotalGold", "blueTotalExperience", "blueAvgLevel", "redAvgLevel", "blueKills", "blueDeaths")
+
+
+lol_data_cut <- lol_data[,var.out.bool, drop = FALSE]
+
+
+wins.bag <- randomForest(blueWinsFactor ~ ., data = lol_data_cut, subset=train, mtry=17, importance = TRUE)
+
+wins.pred.bag <- predict(wins.bag, newdata = lol_data_cut[test,])
+mean(wins.pred.bag != lol_data_cut$blueWinsFactor[test])
+
+importance(wins.bag)
+varImpPlot(wins.bag)
+
+wins.rf <- randomForest(blueWinsFactor ~ ., data = lol_data_cut, subset=train, importance = TRUE)
+
+wins.pred.rf <- predict(wins.rf, newdata = lol_data_cut[test,])
+mean(wins.pred.rf != lol_data_cut$blueWinsFactor[test])
+```
+
+
