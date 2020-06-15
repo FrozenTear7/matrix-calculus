@@ -161,9 +161,6 @@ wins.bag <- randomForest(blueWinsFactor ~ ., data = lol_data_cut, subset=train, 
 wins.pred.bag <- predict(wins.bag, newdata = lol_data_cut[test,])
 mean(wins.pred.bag != lol_data_cut$blueWinsFactor[test])
 
-importance(wins.bag)
-varImpPlot(wins.bag)
-
 wins.rf <- randomForest(blueWinsFactor ~ ., data = lol_data_cut, subset=train, importance = TRUE)
 
 wins.pred.rf <- predict(wins.rf, newdata = lol_data_cut[test,])
