@@ -48,12 +48,7 @@ Poniżej badamy zależność zwycięstwa drużyny niebieskiej od wyłącznie zab
 summary(lm(blueWins ~ blueKills + blueTowersDestroyed, data = lol_data))
 ```
 
-```{r logistic dataset, echo=FALSE}
-fit.logistic <- glm(blueWins ~ blueKills + blueTowersDestroyed, family = binomial, data = lol_data)
-probs.logistic <- predict(fit.logistic, type = "response")
-pred.logistic <- ifelse(probs.logistic > 0.5, 1, 0)
-mean(pred.logistic != blueWins)
-```
+
 
 ```{r wielomianowa dataset, echo=FALSE}
 fit.poly <- lm(blueWins ~ poly(blueKills, 4), data = lol_data)
@@ -121,6 +116,21 @@ summary(lm(blueExperienceDiff ~ blueTowersDestroyed + blueTotalMinionsKilled +
 
 Próbujemy wykorzystać bardziej zaawansowane metody logistyczne, aby wytworzyć model będący
 w stanie przewidzieć wynik meczu na podstawie statystyk z pierwszych 10-ciu minut.
+Na początku sprawdźmy prosty model oparty o regresję logistyczną.
+
+```{r logistic dataset, echo=FALSE}
+set.seed(1)
+n <- nrow(lol_data)
+train <- sample(1:n, n * 0.8)
+test <- -train
+
+fit.logistic <- glm(blueWins ~ blueKills + blueTowersDestroyed, family = binomial, data = lol_data, subset = test)
+probs.logistic <- predict(fit.logistic, lol_data[test,], type = "response")
+pred.logistic <- ifelse(probs.logistic > 0.5, 1, 0)
+mean(pred.logistic != lol_data$blueWins[test])
+```
+
+Przejdźmy do modeli opartych o lasy losowe.
 Na początku zobaczymy, jaką dokładność predykcji jesteśmy w stanie osiągnąć korzystając ze wszystkich predyktorów.
 
 ```{r rf full, echo=FALSE}
@@ -128,11 +138,6 @@ library(randomForest)
 library(tree)
 
 lol_data <- within(lol_data, blueWinsFactor <- factor(ifelse(blueWins <= 0.5, "0", "1")))
-
-set.seed(1)
-n <- nrow(lol_data)
-train <- sample(1:n, n * 0.8)
-test <- -train
 
 wins.bag <- randomForest(blueWinsFactor ~ . - blueWins, data = lol_data, subset=train, mtry=25, importance = TRUE)
 
